@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.0/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.1.0/dist/aframe-extras.min.js"></script>
+  </head>
+
+  <body>
+    <a-scene mindar-image="imageTargetSrc: targets.mind;"
+             color-space="sRGB"
+             renderer="colorManagement: true, physicallyCorrectLights"
+             vr-mode-ui="enabled: false"
+             device-orientation-permission-ui="enabled: false">
+
+      <a-assets>
+        <a-asset-item id="diana" src="3d/artemis.glb"></a-asset-item>
+        <a-asset-item id="jupiter" src="3d/jupiter.glb"></a-asset-item>
+        <a-asset-item id="mart" src="3d/marte.glb"></a-asset-item>
+        <a-asset-item id="neptu" src="3d/neptuno.glb"></a-asset-item>
+        <a-asset-item id="venus" src="3d/venus.glb"></a-asset-item>
+        <a-asset-item id="castellet" src="3d/castellet.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0" >
+        <a-gltf-model src="#diana"
+                      scale="0.1 0.1 0.1"
+                      position="0 0 0"
+                      rotation="0 0 0"
+                      animation-mixer></a-gltf-model>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 1" >
+        <a-gltf-model src="#jupiter"
+                      scale="0.01 0.01 0.01"
+                      position="0 0 0"
+                      rotation="0 0 0"
+                      animation-mixer></a-gltf-model>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-gltf-model src="#mart"
+                      scale="0.05 0.05 0.05"
+                      position="0 -0.2 0"
+                      rotation="0 0 0"
+                      animation-mixer></a-gltf-model>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 3">
+        <a-gltf-model src="#neptu"
+                      scale="2 2 2"
+                      position="0 0 0"
+                      rotation="0 0 0"
+                      animation-mixer></a-gltf-model>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 4">
+        <a-gltf-model src="#venus"
+                      scale="1 1 1"
+                      position="0 0 0"
+                      rotation="0 0 0"
+                      animation-mixer></a-gltf-model>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 5">
+        <a-gltf-model src="#castellet"
+                      scale="1 1 1"
+                      position="0 0 0"
+                      rotation="0 90 0"
+                      animation-mixer></a-gltf-model>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>

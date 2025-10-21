@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>Contactes - CRUD</title>
+  <style>
+    button { margin: 5px; padding: 10px; }
+    #resultat { margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+
+  <h1>AGENDA TEL</h1>
+
+
+  <button onclick="afegirContacte()">Afegir contacte</button>
+  <button onclick="llistarContactes()">Llistar contactes</button>
+  <button onclick="canviarTelefon()">Canviar telèfon</button>
+  <button onclick="eliminarContacte()">Eliminar contacte</button>
+
+
+  <div id="resultat"></div>
+
+
+  <script>
+    let contactes = []; // cada contacte serà [nom, telefon]
+
+
+    function afegirContacte() {
+      let nom = prompt("Introdueix el nom:");
+      let telefon = prompt("Introdueix el telèfon:");
+        
+      contactes.push([nom, telefon]);
+    }
+
+
+    function llistarContactes() {
+      
+      let resultatDiv = "<ul>";
+      contactes.forEach(([nom, telefon]) => {
+          resultatDiv += `<li>${nom} --> ${telefon}</li>`;
+      });
+      resultatDiv += "</ul>";
+      document.getElementById("resultat").innerHTML = resultatDiv;
+    }
+
+
+    function canviarTelefon() {
+        let name = prompt("Introdueix el nom: ");
+        let trobat = false;
+
+        for(let i = 0; i < contactes.length; i++){
+            if(name == contactes[i][0]){
+                let telef = prompt("Introdueix el nou numero de telefon: ");
+                contactes[i][1] = telef;
+                trobat = true;
+            }
+        }
+
+        if(!trobat){
+          alert(`No hi ha cap contacte amb el nom ${name}`);
+        }
+
+    }
+
+
+    function eliminarContacte() {
+        let name = prompt("Introdueix el nom: ");
+        let trobat = false;
+
+        for(let i = 0; i < contactes.length; i++){
+            if(name == contactes[i][0]){
+                trobat = true;
+                contactes.splice(i,1);
+            }
+        }
+
+        if(!trobat){
+          alert(`No hi ha cap contacte amb el nom ${name}`);
+        }
+    }
+
+  </script>
+</body>
+</html>

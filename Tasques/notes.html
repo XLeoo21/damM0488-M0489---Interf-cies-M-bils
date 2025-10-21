@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Exemple DOM sense addEventListener</title>
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Notas alineadas a la izquierda</title>
+  <style>
+
+    #notes {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 1rem 0;
+      max-width: 600px;
+    }
+
+    #notes:not(:empty) {
+      background-color: grey;
+    }
+
+    .nota {
+      position: relative; 
+      background-color: white;
+      border-radius: 10px;
+      padding: 10px 10px 10px 20px;
+      margin: 0;
+    }
+
+    .nota img.trash {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .nota h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.2rem;
+      color: #333;
+    }
+    .nota p {
+      margin: 0.3rem 0;
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+  </style>
+</style>
+</head>
+
+<body>
+
+    <div id="contenidor">
+        <h1 id="titol">Hola!</h1>
+        <button onclick="afegeixNota()">Afegir nota</button>
+    </div>
+
+    <div id="notes"></div>
+
+    <script>
+        const STORAGE_KEY = 'notes';
+        let notes = [];
+
+        function loadFromStorage() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveToStorage() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+        }
+
+        notes = loadFromStorage();
+        mostraNotes();
+
+        function afegeixNota() {
+            const title = prompt("Titol de la nota:");
+            const contingut = prompt("Contingut de la nota:");
+            if (!title && !contingut) return;
+
+                notes.push({actualDate: new Date().toLocaleString(),title,contingut
+        });
+
+        saveToStorage();
+        mostraNotes();
+        }
+
+        function eliminaNota(index) {
+        notes.splice(index, 1);
+        saveToStorage();
+        mostraNotes();
+        }
+
+        function mostraNotes() {
+        const divNotes = document.getElementById("notes");
+        divNotes.innerHTML = "";
+
+        for (let i = 0; i < notes.length; i++) {
+            const notaDiv = document.createElement("div");
+            notaDiv.classList.add("nota");
+
+            const trash = document.createElement("img");
+            trash.src = "papelera.png";
+            trash.alt = "Eliminar nota";
+            trash.classList.add("trash");
+            trash.addEventListener("click", () => eliminaNota(i));
+
+            const fechaP = document.createElement("p");
+            const titolH1 = document.createElement("h1");
+            const contingutP = document.createElement("p");
+
+            fechaP.textContent = notes[i].actualDate;
+            titolH1.textContent = notes[i].title;
+            contingutP.textContent = notes[i].contingut;
+
+            notaDiv.appendChild(trash);
+            notaDiv.appendChild(fechaP);
+            notaDiv.appendChild(titolH1);
+            notaDiv.appendChild(contingutP);
+
+            divNotes.appendChild(notaDiv);
+        }
+    }
+  </script>
+</body>
+
+</html>

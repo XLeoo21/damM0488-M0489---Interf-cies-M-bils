@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>Biblioteca - CRUD</title>
+  <style>
+    button { margin: 5px; padding: 10px; }
+    #resultat { margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+
+  <h1>BIBLIOTECA</h1>
+
+
+  <button onclick="afegirLlibre()">Afegir llibre</button>
+  <button onclick="llistarLlibres()">Llistar llibres</button>
+  <button onclick="canviarSegle()">Canviar segle</button>
+  <button onclick="eliminarLlibre()">Eliminar llibre</button>
+
+
+  <div id="resultat"></div>
+
+
+  <script>
+    let biblioteca = []; // cada contacte serà [nom, telefon]
+
+
+    function afegirLlibre() {
+      let titol = prompt("Introdueix el titol del llibre:");
+      let autor = prompt("Introdueix el autor del llibre:");
+      let segle = prompt("Introdueix el segle del llibre: ");
+
+      biblioteca.push({titol,autor,segle});
+      alert("Llibre afegit");
+    }
+
+
+    function llistarLlibres() {
+      
+      let resultatDiv = "<ul>";
+      biblioteca.forEach(({titol, autor, segle}) => {
+          resultatDiv += `<li>Titol: ${titol} // Autor: ${autor} // Segle: ${segle}</li>`;
+      });
+      resultatDiv += "</ul>";
+      document.getElementById("resultat").innerHTML = resultatDiv;
+    }
+
+
+    function canviarSegle() {
+        let title = prompt("Introdueix el nom del llibre per a canviar el segle: ");
+        let trobat = false;
+
+        for(let i = 0; i < biblioteca.length; i++){
+            if(title == biblioteca[i].titol){
+                let segle = prompt("Introdueix el nou segle: ");
+                biblioteca[i].segle = segle;
+                trobat = true;
+            }
+        }
+
+        if(!trobat){
+          alert(`No hi ha cap llibre amb el titol --> ${title}`);
+        }
+
+    }
+
+
+    function eliminarLlibre() {
+        let title = prompt("Introdueix el titol del llibre: ");
+        let trobat = false;
+
+        for(let i = 0; i < biblioteca.length; i++){
+            if(title == biblioteca[i].titol){
+                trobat = true;
+                biblioteca.splice(i,1);
+            }
+        }
+
+        if(!trobat){
+          alert(`No hi ha cap llibre amb el titol --> ${title}`);
+        }
+    }
+
+  </script>
+</body>
+</html>

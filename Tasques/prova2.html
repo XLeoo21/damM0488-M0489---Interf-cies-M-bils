@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Local storage</title>
+  </head>
+  <body>
+    <h1>LOCAL STORAGE</h1>
+
+    <script>
+        let visitesAnteriors = localStorage.getItem("visites");
+
+        if (visitesAnteriors !== null) {
+           localStorage.setItem("visites", Number(visitesAnteriors) + 1);
+        } else {
+            localStorage.setItem("visites", 1);
+        }
+
+        alert("Visites anteriors: " + visitesAnteriors);
+    </script>
+  </body>
+</html>
